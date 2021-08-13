@@ -30,7 +30,7 @@ public class Sistema {
 	
 	
 	private static float calcularmedia(int posicao ) {
-		return nota1[posicao] + nota2[posicao]/ 2; 
+		return (nota1[posicao] + nota2[posicao])/2; 
 	}
 	
 	public static void main(String[] args) {
