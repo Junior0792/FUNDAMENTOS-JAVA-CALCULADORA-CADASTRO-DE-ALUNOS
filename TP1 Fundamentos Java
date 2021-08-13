@@ -1,0 +1,121 @@
+package Sistema.aluno;
+
+import java.util.Scanner;
+
+public class Sistema {
+
+	private static String[] nomes;
+	private static float[] nota1;
+	private static float[] nota2;
+	private final static int LIMITE = 100; 
+	
+	private static void impressao(int posicao) {	
+		
+	String situacao;	
+	
+	float definirsituacao = calcularmedia(posicao);
+	
+	if(definirsituacao < 4 ) {
+		situacao = "Reprovado";	
+	}else if(definirsituacao >= 4 && definirsituacao <= 7) {
+		situacao = "Prova final";
+	}else {
+		situacao = "Aprovado";
+	}
+		
+	System.out.printf("[%d] %s - AV1: %.2f -AV2: %.2f - MEDIA: %.2f: %s \n",
+			posicao, nomes[posicao], nota1[posicao], nota2[posicao], definirsituacao, situacao);
+				}
+
+	
+	
+	private static float calcularmedia(int posicao ) {
+		return nota1[posicao] + nota2[posicao]/ 2; 
+	}
+	
+	public static void main(String[] args) {
+		
+		nomes = new String[LIMITE];
+		nota1 = new float[LIMITE];
+		nota2 = new float[LIMITE]; 
+		
+		
+		Scanner in  = new Scanner(System.in); 
+		String opcao = null;
+		int index = 0;
+		do {
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("[1] Registrar as notas de um novo aluno: ");
+			System.out.println("[2] Consultar boletim de um aluno: ");
+			System.out.println("[3] Consultar notas da turma: ");
+			System.out.println("[4] Sair: ");
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("Digite o numero que você desejar: ");
+			
+	     	opcao = in.next(); 
+	     	
+	     	switch (opcao) {
+			case "1":
+				if(index < LIMITE) {
+					System.out.println("Digite o nome do(a) aluno(a): ");
+					nomes[index] = in.next();
+					System.out.println("Digite a primeira nota: ");
+					nota1[index] = in.nextFloat();
+					System.out.println("Digite a segunda nota: ");
+					nota2[index] = in.nextFloat();
+					System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+					System.out.println("Aluno(a) cadastrado(a) com sucesso!");
+					impressao(index);
+					System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+					index++;
+				}else {
+					System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+					System.out.println("Impossivel o cadrastramento do aluno(a)");
+					System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+					
+				}
+				break;
+				
+			case "2":
+				System.out.println("Digite o codigo do(a) aluno(a): ");
+				int codigo = in.nextInt();
+				if(codigo >= 0 && codigo < index) {
+					impressao(codigo);
+				}else {
+					System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+					System.out.println("O codigo informado é invalido)");
+					System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+				}
+				
+				break;
+				
+			case"3":
+				for (int i = 0; i < index; i++) {
+					impressao(i);
+				}
+				break;
+				
+			case"4":
+				System.out.println("Sando do sistema...");
+				
+				break;
+				
+				default: 
+					System.out.print("Opção Invalida");
+					break; 
+						
+				}
+	     	
+	     		} while (!"4".equals(opcao));
+		
+		         System.out.println("Finalizado");
+		         in.close();
+		
+		
+				{
+				
+			}
+		
+		
+	}
+}
